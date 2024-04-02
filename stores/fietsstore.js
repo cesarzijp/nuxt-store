@@ -12,6 +12,7 @@ export const useFietsStore = defineStore("fietsstore", {
         price: 2300,
         priceCurrency: "EUR",
         imgPrefix: "cruiserst__",
+        totalPrice: 0,
       },
       classic: {
         kleur: "black",

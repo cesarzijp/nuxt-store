@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>This is product index</h1>
-    <div>
+    <div class="fiets-grid">
       <div v-for="bike in productData">
         <NuxtLink :to="`/products/${bike.id}`">
           <div>
@@ -25,4 +25,32 @@ const productData = ref([
 ]);
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.fiets-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fiets-grid > div {
+  width: calc(33.33% - 10px);
+
+  box-sizing: border-box;
+  background: white;
+}
+
+.fiets-grid a {
+  color: gray;
+  border: 1px solid #80808063;
+  border-radius: 25px;
+  display: block;
+  text-decoration: none;
+  transition: 0.4s ease;
+  padding: 9px 31px !important;
+}
+
+.fiets-grid a:hover {
+  color: black;
+}
+</style>

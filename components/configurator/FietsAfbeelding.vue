@@ -45,7 +45,7 @@ img.product-page-img {
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.75s linear;
 }
 
 .v-enter-from,

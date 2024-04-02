@@ -17,10 +17,18 @@
         <h4>Slot</h4>
         <KiesFietsSlot />
         <br />
-        <p>{{ items }}</p>
-        <button @click="handleAddToCart">Add to cart</button>
-        <button @click="cartStore.$reset()">Reset cart</button>
+        <p>Price: {{ totalPrice }}</p>
+        <br />
+
+        <button class="add-to-cart" @click="handleAddToCart">
+          Add to cart
+        </button>
+        <br />
+        <b>Raw state data</b>
         <ChildTest />
+        <b>Raw cart data</b>
+        <p>{{ items }}</p>
+        <button @click="cartStore.$reset()">Reset cart</button>
       </div>
     </div>
   </div>
@@ -44,6 +52,7 @@ const cartStore = useCartStore();
 const { st, cross, classic } = storeToRefs(store);
 const { items } = storeToRefs(cartStore);
 const { addToCart } = cartStore;
+import { computed } from "vue";
 
 console.log("st", st.value);
 
@@ -53,6 +62,19 @@ const handleAddToCart = () => {
   store.$reset();
   router.push({ path: "/checkout" });
 };
+
+const totalPrice = computed(() => {
+  let startingPrice = st.value.price;
+  let runningTotal = startingPrice;
+
+  if (st.value.extraConnectivity) {
+    runningTotal += 199;
+  }
+  if (st.value.extraPower) {
+    runningTotal += 299;
+  }
+  return runningTotal;
+});
 </script>
 
 <style lang="css" scoped>
@@ -69,7 +91,24 @@ const handleAddToCart = () => {
 }
 
 .product-page-sidebar {
-  width: 300px;
+  width: 400px;
+}
+
+button.add-to-cart {
+  width: 100%;
+  display: block;
+  border: none;
+  background: #232323cd;
+  color: white;
+  padding: 20px;
+  border-radius: 100px;
+  margin-bottom: 30px;
+  font-size: 19px;
+  font-weight: bold;
+  transition: 0.4s ease;
+}
+
+button.add-to-cart:hover {
+  background: #000000;
 }
 </style>
-../../components/configurator/KiesFietsSlot.vue
